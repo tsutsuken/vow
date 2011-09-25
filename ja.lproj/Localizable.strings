@@ -1,0 +1,47 @@
+
+/* Common */
+"Cancel" = "キャンセル";
+"Confirm" = "アプリを開く";
+
+
+/* RootView *///
+"To do today" = "今日やること";//
+"Make today's vow" = "今日やることを宣言する";//
+"Finish" = "終了する";//
+"You've finished today's task" = "今日やることは終了しました";//
+"Have a nice day!" = "それでは、良い一日を！";//
+"Are you sure?" = "本当に終了しますか？";//
+"YES" = "はい";//
+"Finished" = "おつかれさまでした";//
+"Conguraturations!" = "おつかれさまでした";//
+"Unfortunately, you couldn't keep today's vow." = "残念ながら今日の誓いを守ることが出来ませんでした。\n明日は頑張りましょう。";//
+"You've kept today's vow." = "今日の誓いを守ることが出来ました。\n引き続き明日も頑張りましょう。";//
+
+/* AddPromiseView */
+"Action" = "アクション";//
+"Add Action" = "アクションを追加";//
+"Yes, I do" = "はい、誓います";//
+"Vow" = "宣誓";//
+"Today's vow" = "宣誓";//
+"Today, I do" = "   私は今日";//
+"" = "をやります。";//
+"Do you make a vow?" = "誓いますか？";//
+"＊You can make one vow per day.\n＊You cannot edit this later." = "※宣言出来るのは１日に１回だけです。\n※あとから編集は出来ません。";//
+/*SecondView*/
+"Calendar" = "カレンダー";//
+
+/*SettingView*/
+"Settings" = "設定";//
+"Support" = "サポート";//
+"Informaton" = "情報";//
+"Reminder" = "リマインダー";//
+"Support Forum" = "サポートサイト";//
+"Legal" = "著作権情報";//
+"Email Us" = "メールでのお問い合わせ•ご意見";//
+"None" = "なし";//
+"Every hour" = "１時間ごと";//
+"Every 2 hours" = "２時間ごと";//
+"Every 3 hours" = "３時間ごと";//
+"Every 4 hours" = "４時間ごと";//
+"Every 5 hours" = "５時間ごと";//
+
