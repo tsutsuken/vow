@@ -29,6 +29,7 @@
 
 #pragma mark - Memory management
 
+/*
 - (void)dealloc
 {
     [editedObject release];
@@ -37,7 +38,7 @@
     [datePicker release];
     [super dealloc];
 }
-
+*/
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -64,11 +65,11 @@
 	// Configure the save and cancel buttons.
 	UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save)];
 	self.navigationItem.rightBarButtonItem = saveButton;
-	[saveButton release];
+	//[saveButton release];
 	
 	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
 	self.navigationItem.leftBarButtonItem = cancelButton;
-	[cancelButton release];
+	//[cancelButton release];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

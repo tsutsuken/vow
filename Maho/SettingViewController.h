@@ -7,18 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MahoAppDelegate.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "CopyrightViewController.h"
 #import "ReminderViewController.h"
 
+
 @protocol SettingViewControllerDelegate;
 @interface SettingViewController : UITableViewController<MFMailComposeViewControllerDelegate,ReminderViewControllerDelegate>{
-    id <SettingViewControllerDelegate> delegate;
+    //id <SettingViewControllerDelegate> delegate;
     NSArray *timeIntervalArray;
 }
 @property (nonatomic, assign) id <SettingViewControllerDelegate> delegate;
-@property(nonatomic,retain) NSArray *timeIntervalArray;
+@property (nonatomic,retain) NSArray *timeIntervalArray;
 
 -(void)showSupportSite;
 -(void)setEmail;

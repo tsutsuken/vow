@@ -37,6 +37,6 @@
 - (Promise *)promiseForReminder;
 - (NSMutableArray *)setActionsArrayWith:(Promise *)promise;
 - (NSDateFormatter *)dateFormatter;
--(BOOL)isJapanese;
+- (BOOL)isJapanese;
 
 @end

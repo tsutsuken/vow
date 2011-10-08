@@ -12,7 +12,7 @@
 #import "DateEditViewController.h"
 #import "MahoAppDelegate.h"
 #import "EditableTableViewCell.h"
-
+#import "RootViewController.h"
 
 @implementation AddPromiseForTestViewController
 
@@ -33,13 +33,6 @@
 }
 
 #pragma mark - Memory management
-
-- (void)dealloc
-{
-    [dateFormatter release];
-    [promise release];
-    [super dealloc];
-}
 
 - (void)viewDidUnload
 {
@@ -64,10 +57,10 @@
     self.title = NSLocalizedString(@"Test", nil);
     self.actionsArray = [NSMutableArray array];
     self.tableView.allowsSelectionDuringEditing = YES;
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                                                                            target:self action:@selector(finish:)] autorelease];
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
-                                                                                           target:self action:@selector(cancel:)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
+                                                                                            target:self action:@selector(finish:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
+                                                                                           target:self action:@selector(cancel:)];
     
     //self.navigationController.navigationBar.tintColor = [self initWithHex:kNavBarColor alpha:0.5];
     self.editing = YES;
@@ -110,7 +103,7 @@
 }
 
 - (void)cancel:(id)sender {
-	[delegate addPromiseViewController:self didFinishWithSave:NO];
+	[delegate addPromiseForTestViewController:self didFinishWithSave:NO];
 }
 
 #pragma mark - Push Footer Button
@@ -163,7 +156,7 @@
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:dateCellIdentifier];
         if (cell == nil) {		
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:dateCellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:dateCellIdentifier];
             cell.textLabel.textAlignment = UITextAlignmentCenter;
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
@@ -177,7 +170,7 @@
             ///アクション挿入用のセル
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:insertionCellIdentifier];
             if (cell == nil) {		
-                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:insertionCellIdentifier] autorelease];
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:insertionCellIdentifier];
                 cell.textLabel.textAlignment = UITextAlignmentCenter;
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
@@ -299,7 +292,6 @@
 	if (editingStyle == UITableViewCellEditingStyleInsert) {
         [self insertActionAnimated:YES];
         self.navigationItem.rightBarButtonItem.enabled = YES;
-        //[self addAction];
 	}	
 }
 
@@ -325,7 +317,7 @@
              controller.editedFieldKey = @"date";
              controller.editedFieldName = NSLocalizedString(@"Date",@"display name for Date");
              [self.navigationController pushViewController:controller animated:YES];
-             [controller release];
+             //[controller release];
              
         } break;
         case 1: {
@@ -394,26 +386,6 @@
 	}
 	return dateFormatter;
 }
-- (UIColor *) initWithHex:(NSString *)string alpha:(CGFloat)alpha {
-    UIColor *color = nil;
-    if (string && [string length] == 7) {
-        NSString *colorString = [NSString stringWithFormat:
-                                 @"0x%@ 0x%@ 0x%@",
-                                 [string substringWithRange:NSMakeRange(1, 2)],
-                                 [string substringWithRange:NSMakeRange(3, 2)],
-                                 [string substringWithRange:NSMakeRange(5, 2)]];
-        
-        unsigned red, green, blue;
-        NSScanner *scanner = [NSScanner scannerWithString:colorString];
-        if ([scanner scanHexInt:&red] && [scanner scanHexInt:&green] && [scanner scanHexInt:&blue]) {
-            color = [[UIColor alloc] initWithRed:(float)red / 0xff
-                                           green:(float)green / 0xff
-                                            blue:(float)blue / 0xff
-                                           alpha:alpha];
-        }
-    }
-    return color;
-}
 
 #pragma mark - UIAlertView
 
@@ -424,13 +396,13 @@
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Do you make a vow?", nil) message:message
                                                    delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Yes, I do", nil), nil];
 	[alert show];	
-	[alert release];
+	//[alert release];
 }
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 1){
-        [delegate addPromiseForTestViewController:self didFinishWithSave:YES];
+        [self.delegate addPromiseForTestViewController:self didFinishWithSave:YES];
     }
 }
 

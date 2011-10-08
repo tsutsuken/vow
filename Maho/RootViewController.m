@@ -18,7 +18,7 @@
 @synthesize actionsArray;
 @synthesize dateFormatter;
 @synthesize footerButton;
-@synthesize tableView;
+@synthesize rootTableView;
 @synthesize checkBoxTableViewCell;
 @synthesize AdMaker;
 
@@ -75,6 +75,7 @@
 
 - (NSString *)URLForApp
 {
+    id appDelegate = [[UIApplication sharedApplication] delegate];
     if ([appDelegate isJapanese]) {
         return kAppURLForJapanese;
     }
@@ -94,7 +95,7 @@
 	actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
 	//actionSheet.destructiveButtonIndex = 1;	// make the second button red (destructive)
 	[actionSheet showInView:self.view.window]; // show from our table view (pops up in the middle of the table)
-	[actionSheet release];
+
 }
 
 
@@ -113,13 +114,13 @@
 }
 
 #pragma mark - Memory management
-
+/*
 - (void)dealloc
 {
     [__managedObjectContext release];
     [super dealloc];
 }
-
+*/
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -162,32 +163,6 @@
     
 }
 
-
-#pragma mark AdWhirlDelegate methods
-- (void)setAdWhirlView
-{
-    AdWhirlView *awView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
-    CGSize adSize = [awView actualAdSize];
-    CGRect newFrame = awView.frame;
-    newFrame.size.height = adSize.height;
-    newFrame.size.width = adSize.width;
-    newFrame.origin.x = (self.view.bounds.size.width - adSize.width)/2;
-    newFrame.origin.y = 317;
-    awView.frame = newFrame;
-    
-    [self.view addSubview:awView];
-    
-}
-- (NSString *)adWhirlApplicationKey
-{
-    return kAdWhirlIdentifier;
-}
-
-- (UIViewController *)viewControllerForPresentingModalView
-{
-    return self;
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -201,12 +176,12 @@
     
     UIBarButtonItem *settingButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Settings",nil) style:UIBarButtonItemStylePlain target:self action:@selector(showSettingView)];
      self.navigationItem.leftBarButtonItem = settingButton;
-    [settingButton release];
+    //[settingButton release];
      
 
     UIBarButtonItem *tweetButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheetForOutPut)];
     self.navigationItem.rightBarButtonItem = tweetButton;
-    [tweetButton release];
+    //[tweetButton release];
 
     /*
     UIBarButtonItem *testButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Test",nil) style:UIBarButtonItemStylePlain target:self action:@selector(showAddPromiseForTestView)];
@@ -254,7 +229,7 @@
     //宣言ボタンの設定
     
     self.footerButton = nil;
-    self.tableView.tableFooterView = nil;
+    self.rootTableView.tableFooterView = nil;
     
     self.footerButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     self.footerButton.frame = CGRectMake(20, 0, 280, 44);
@@ -279,8 +254,8 @@
     //footerView.backgroundColor = [UIColor blueColor];
     [footerView addSubview:footerButton];
     
-    self.tableView.tableFooterView = footerView; 
-    [footerView release];
+    self.rootTableView.tableFooterView = footerView; 
+    //[footerView release];
 }
 - (BOOL)canTakeNewVow 
 {
@@ -333,12 +308,12 @@
     if (![[aFetchedResultsController fetchedObjects] count] == 0) {
         self.promise = [[aFetchedResultsController fetchedObjects] objectAtIndex:0];
     }
-    
+    /*
     [aFetchedResultsController release];
     [fetchRequest release];
     [sortDescriptors release];
     [sortDescriptor release];
-    
+    */
     NSLog(@"state is %@ in %s",promise.state, __func__);
     
 }
@@ -379,11 +354,13 @@
             NSMutableArray *mutableArray = [fetchedObjects mutableCopy];
             self.actionsArray = mutableArray;
             
+            /*
             [mutableArray release];
             //[fetchedObjects release];//サンプルではリリースしない
             [fetchRequest release];
             [sortDescriptor release];
             [sortDescriptors release];
+             */
             
         }
     }
@@ -478,15 +455,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Action *selectedAction = [actionsArray objectAtIndex:indexPath.row];
-    CheckBoxTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    CheckBoxTableViewCell *cell = (CheckBoxTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     
     if ([selectedAction.done boolValue] == YES) {
-        //cell.accessoryType = UITableViewCellAccessoryNone;
         [cell.checkBox setSelected:NO];
         selectedAction.done = [NSNumber numberWithBool:NO];
     }
     else {
-        //cell.accessoryType = UITableViewCellAccessoryCheckmark;
         [cell.checkBox setSelected:YES];
         selectedAction.done = [NSNumber numberWithBool:YES];
     }
@@ -531,7 +506,7 @@
     
     NSManagedObjectContext *addingContext = [[NSManagedObjectContext alloc] init];
 	self.addingManagedObjectContext = addingContext;
-	[addingContext release];
+	//[addingContext release];
     [addingManagedObjectContext setPersistentStoreCoordinator:[self.managedObjectContext persistentStoreCoordinator]];
     
     
@@ -546,7 +521,7 @@
     controller.promise.state = kPromiseStateDoing;
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentModalViewController:navController animated:YES];
-    [controller release];
+    //[controller release];
     
 }
 
@@ -566,9 +541,10 @@
         
         [self setPromise];
         [self setActionsArray];
-        [self.tableView reloadData];
+        [self.rootTableView reloadData];
         [self setFooterButton];
         [self showBeginningAlert];
+        id appDelegate = [[UIApplication sharedApplication] delegate];
         [appDelegate setReminder];
         
 	}
@@ -586,7 +562,7 @@
     controller.delegate = self;
     NSManagedObjectContext *addingContext = [[NSManagedObjectContext alloc] init];
 	self.addingManagedObjectContext = addingContext;
-	[addingContext release];
+	//[addingContext release];
 	
 	[addingManagedObjectContext setPersistentStoreCoordinator:[self.managedObjectContext persistentStoreCoordinator]];
     
@@ -601,7 +577,7 @@
     controller.promise.state = kPromiseStateDoing;
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentModalViewController:navController animated:YES];
-    [controller release];
+    //[controller release];
     
 }
 
@@ -635,78 +611,24 @@
     
     [self setPromise];
     [self setActionsArray];
-    [self.tableView reloadData];
+    [self.rootTableView reloadData];
     [self setFooterButton];
     [self showBeginningAlert];
+    id appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate setReminder];
     
     NSLog(@"ManagedObject Saved");
 }
-/*
- 
- - (void)showAddPromiseView
- {
- AddPromiseViewController *controller = [[AddPromiseViewController alloc] initWithNibName:@"AddPromiseViewController" bundle:nil];
- controller.delegate = self;
- NSManagedObjectContext *context = self.managedObjectContext;
- controller.promise = (Promise *)[NSEntityDescription insertNewObjectForEntityForName:@"Promise" inManagedObjectContext:context];
- 
- //時分を含まないGMT0の日付をセット
- NSString *nowDateString = [self.dateFormatter stringFromDate:[NSDate date]];
- NSLog(@"Added promise's GMT:9 date is %@",nowDateString);
- controller.promise.date = [self.dateFormatter dateFromString:nowDateString];
- NSLog(@"Added promise's GMT:0 date is %@",controller.promise.date);
- 
- controller.promise.state = kPromiseStateDoing;
- UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
- [self presentModalViewController:navController animated:YES];
- [controller release];
- 
- }
- 
-- (void)addPromiseViewController:(AddPromiseViewController *)controller didFinishWithSave:(BOOL)save
-{
-    //actionsArrayをセット
-    //アクションを履歴に登録
-    if (save) {
-        //新promiseをRootにセット
-        //ActionsArrayをセット
-        //リロード
-        //ボタンを変更
-        //ボタンは必ず押せるので、enabledは必要ない
-        self.promise = controller.promise;
-        [self setActionsArray];
-        [self.tableView reloadData];
-        [self setFooterButton];
-        [self showCheeringAlert];
-        
-    }
-    else {
-        //新promiseを削除
-        [self.managedObjectContext deleteObject:controller.promise];
-        
-    }
-    
-    NSError *error = nil;
-    if (![self.managedObjectContext save:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        exit(-1);
-    }
-    
-    [self dismissModalViewControllerAnimated:YES];
-    
-    NSLog(@"state is %@ in %s",promise.state, __func__);
-    
-}
-*/
+
 - (void)finishPromise
 {
     [self judgePromise];
     [self setActionsArray];
-    [self.tableView reloadData];
+    [self.rootTableView reloadData];
     [self setFooterButton];
     footerButton.enabled = [self canTakeNewVow];
     [self sendNotification];
+    id appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate resetAllReminders];
     
 }
@@ -764,7 +686,7 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:settingViewController];
     [self presentModalViewController:navController animated:YES];
     
-    [settingViewController release];
+    //[settingViewController release];
 	
 }
 
@@ -794,7 +716,7 @@
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Have a nice day!", nil) message:nil
                                                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 	[alert show];	
-	[alert release];
+	//[alert release];
 }
 
 - (void)showResultAlertWithMessage:(NSString *)message andTitle:(NSString *)title
@@ -802,14 +724,14 @@
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message
                                                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 	[alert show];	
-	[alert release];
+	//[alert release];
 }
 - (void)showConfirmAlert
 {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Are you sure?", nil) message:nil
                                                    delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"YES", nil), nil];
 	[alert show];	
-	[alert release];
+	//[alert release];
 }
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

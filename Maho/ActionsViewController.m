@@ -15,14 +15,15 @@
 @synthesize promise,action;
 @synthesize actionsArray;
 @synthesize dateFormatter;
-@synthesize tableView;
+@synthesize actionTableView;
 
 #pragma mark - Memory management
-
+/*
 - (void)dealloc
 {
     [super dealloc];
 }
+*/
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -42,7 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView.allowsSelection = NO;
+    self.actionTableView.allowsSelection = NO;
     self.title = [self.dateFormatter stringFromDate:promise.date];
     [self setActionsArray];
     //[self setAdWhirlView];
@@ -102,11 +103,13 @@
     NSMutableArray *mutableArray = [fetchedObjects mutableCopy];
     self.actionsArray = mutableArray;
     
+    /*
     [mutableArray release];
     //[fetchedObjects release];//サンプルではリリースしない
     [fetchRequest release];
     [sortDescriptor release];
     [sortDescriptors release];
+     */
     
 }
 
@@ -128,7 +131,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell.
@@ -161,33 +164,6 @@
         [dateFormatter setDateStyle:kCFDateFormatterLongStyle];
 	}
 	return dateFormatter;
-}
-
-#pragma mark AdWhirlDelegate methods
-- (void)setAdWhirlView
-{
-    
-    AdWhirlView *awView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
-    CGSize adSize = [awView actualAdSize];
-    CGRect newFrame = awView.frame;
-    newFrame.size.height = adSize.height;
-    newFrame.size.width = adSize.width;
-    newFrame.origin.x = (self.view.bounds.size.width - adSize.width)/2;
-    newFrame.origin.y = 317;
-    awView.frame = newFrame;
-    
-    [self.view addSubview:awView];
-    
-    
-}
-- (NSString *)adWhirlApplicationKey
-{
-    return kAdWhirlIdentifier;
-}
-
-- (UIViewController *)viewControllerForPresentingModalView
-{
-    return self;
 }
 
 @end

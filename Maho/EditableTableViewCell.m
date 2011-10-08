@@ -60,11 +60,11 @@
     [super setEditing:editing animated:animated];
 	textField.enabled = editing;
 }
-
+/*
 - (void)dealloc {
 	[textField release];
 	[super dealloc];
 }
-
+*/
 
 @end

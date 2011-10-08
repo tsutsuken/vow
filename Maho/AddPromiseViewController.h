@@ -13,12 +13,12 @@
 @protocol AddPromiseViewControllerDelegate;
 
 @interface AddPromiseViewController : UITableViewController <UIAlertViewDelegate> {
-    id <AddPromiseViewControllerDelegate> delegate;
+    //id <AddPromiseViewControllerDelegate> delegate;
     Promise *promise;
     Action *action;
     NSDateFormatter *dateFormatter;
     NSMutableArray *actionsArray;
-    EditableTableViewCell *editableTableViewCell;
+    //EditableTableViewCell *editableTableViewCell;
 }
 @property (nonatomic, assign) id <AddPromiseViewControllerDelegate> delegate;
 @property (nonatomic, retain) Promise *promise;
@@ -27,10 +27,8 @@
 @property (nonatomic, retain) NSMutableArray *actionsArray;
 @property (nonatomic, assign) IBOutlet EditableTableViewCell *editableTableViewCell;
 
-- (void)addAction;
 - (void)finish:(id)sender;
 - (void)cancel:(id)sender;
-- (UIColor *)initWithHex:(NSString *)string alpha:(CGFloat)alpha;
 - (void)insertActionAnimated:(BOOL)animated;
 - (void)showConfirmAlert;
 

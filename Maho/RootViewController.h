@@ -11,15 +11,13 @@
 #import <CoreData/CoreData.h>
 #import "AddPromiseViewController.h"
 #import "AddPromiseForTestViewController.h"
-#import "AdWhirlView.h"
-#import "AdWhirlDelegateProtocol.h"
 #import "CheckBoxTableViewCell.h"
 #import <Twitter/Twitter.h>
 #import "AdMakerView.h"
 
 @class Promise,Action;
 
-@interface RootViewController : UIViewController <NSFetchedResultsControllerDelegate,AddPromiseViewControllerDelegate,SettingViewControllerDelegate,UIAlertViewDelegate,AddPromiseForTestViewControllerDelegate,AdWhirlDelegate,UITableViewDelegate, UITableViewDataSource,UIActionSheetDelegate> {
+@interface RootViewController : UIViewController <NSFetchedResultsControllerDelegate,AddPromiseViewControllerDelegate,SettingViewControllerDelegate,UIAlertViewDelegate,AddPromiseForTestViewControllerDelegate,UITableViewDelegate, UITableViewDataSource,UIActionSheetDelegate> {
 
     NSManagedObjectContext *managedObjectContext;
     NSManagedObjectContext *addingManagedObjectContext;
@@ -28,8 +26,8 @@
     NSMutableArray *actionsArray;
     NSDateFormatter *dateFormatter;
     UIButton *footerButton;
-    IBOutlet UITableView *tableView;
-    CheckBoxTableViewCell *checkBoxTableViewCell;
+    IBOutlet UITableView *rootTableView;
+    //CheckBoxTableViewCell *checkBoxTableViewCell;
     AdMakerView *AdMaker;
     
 }
@@ -41,7 +39,7 @@
 @property (nonatomic, retain) NSMutableArray *actionsArray;
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
 @property (nonatomic, retain) UIButton *footerButton;
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) IBOutlet UITableView *rootTableView;
 @property (nonatomic, assign) IBOutlet CheckBoxTableViewCell *checkBoxTableViewCell;
 @property (nonatomic, retain) AdMakerView *AdMaker;
 

@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MahoAppDelegate.h"
 
+int main(int argc, char *argv[])
+{
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([MahoAppDelegate class]));
+    }
+}
+
+/*
 int main(int argc, char *argv[])
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
@@ -15,3 +24,4 @@ int main(int argc, char *argv[])
     [pool release];
     return retVal;
 }
+*/

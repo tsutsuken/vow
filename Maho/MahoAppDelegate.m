@@ -76,7 +76,7 @@
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
 }
-
+/*Ken
 - (void)dealloc
 {
     [_window release];
@@ -87,7 +87,7 @@
     [_navigationControllerForSecondView release];
     [super dealloc];
 }
-
+*/
 - (void)awakeFromNib
 {
     RootViewController *rootViewController = (RootViewController *)[self.navigationControllerForRootView topViewController];
@@ -222,7 +222,7 @@
     //第１チェック:リマインダーの設定がNoneならセットしない
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     int remindInterval = [[defaults objectForKey:kTimeInterval] intValue];
-    if (remindInterval == nil){
+    if (remindInterval == 0){
         NSLog(@"Don't set Reminder%s",__func__);
         return;
     }
@@ -256,7 +256,7 @@
         localNotif.alertAction = NSLocalizedString(@"Confirm",nil);
         
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
-        [localNotif release];
+        //[localNotif release];Ken
         
     }
     
@@ -355,10 +355,12 @@
         promise = [[aFetchedResultsController fetchedObjects] objectAtIndex:0];
     }
     
+    /*Ken
     [aFetchedResultsController release];
     [fetchRequest release];
     [sortDescriptors release];
     [sortDescriptor release];
+     */
     
     NSLog(@"promise.state  %@ in %s",[promise valueForKey:@"state"], __func__);
     
@@ -400,9 +402,11 @@
             array = [fetchedObjects mutableCopy];
             
             //[fetchedObjects release];//サンプルではリリースしない
+            /*Ken
             [fetchRequest release];
             [sortDescriptor release];
             [sortDescriptors release];
+             */
             
         }
     }

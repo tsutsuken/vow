@@ -20,7 +20,7 @@
     [self willChangeValueForKey:@"actions" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"actions"] addObject:value];
     [self didChangeValueForKey:@"actions" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
-    [changedObjects release];
+    //[changedObjects release];
 }
 
 - (void)removeActionsObject:(Action *)value {
@@ -28,7 +28,7 @@
     [self willChangeValueForKey:@"actions" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"actions"] removeObject:value];
     [self didChangeValueForKey:@"actions" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
-    [changedObjects release];
+    //[changedObjects release];
 }
 
 - (void)addActions:(NSSet *)value {    

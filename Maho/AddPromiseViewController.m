@@ -25,20 +25,6 @@
 
 #pragma mark - Memory management
 
-- (void)dealloc
-{
-    [dateFormatter release];
-    [promise release];
-    [super dealloc];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -56,12 +42,11 @@
     self.title =  NSLocalizedString(@"Today's vow", nil);
     self.actionsArray = [NSMutableArray array];
     self.tableView.allowsSelectionDuringEditing = YES;
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                                                                           target:self action:@selector(finish:)] autorelease];
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
-                                                                                            target:self action:@selector(cancel:)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
+                                                                                           target:self action:@selector(finish:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
+                                                                                            target:self action:@selector(cancel:)];
 
-    //self.navigationController.navigationBar.tintColor = [self initWithHex:kNavBarColor alpha:0.5];
     self.editing = YES;
     
     self.navigationItem.rightBarButtonItem.enabled = NO;
@@ -126,7 +111,7 @@
         ///アクション挿入用のセル
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:insertionCellIdentifier];
         if (cell == nil) {		
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:insertionCellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:insertionCellIdentifier];
             cell.textLabel.textAlignment = UITextAlignmentCenter;
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
@@ -198,9 +183,9 @@
     label.text = NSLocalizedString(@"Today, I do", nil);
     
 	[customView addSubview:label];
-    [label release];
+    //[label release];
     
-	return [customView autorelease];
+	return customView;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
@@ -222,9 +207,9 @@
     label.text = NSLocalizedString(@"", nil);
     
 	[customView addSubview:label];
-    [label release];
+    //[label release];
     
-	return [customView autorelease];
+	return customView;
 }
 
 #pragma mark - Table view Edit
@@ -279,7 +264,6 @@
 	if (editingStyle == UITableViewCellEditingStyleInsert) {
         [self insertActionAnimated:YES];
         self.navigationItem.rightBarButtonItem.enabled = YES;
-        //[self addAction];
 	}	
 }
 
@@ -376,26 +360,6 @@
 	}
 	return dateFormatter;
 }
-- (UIColor *) initWithHex:(NSString *)string alpha:(CGFloat)alpha {
-    UIColor *color = nil;
-    if (string && [string length] == 7) {
-        NSString *colorString = [NSString stringWithFormat:
-                                 @"0x%@ 0x%@ 0x%@",
-                                 [string substringWithRange:NSMakeRange(1, 2)],
-                                 [string substringWithRange:NSMakeRange(3, 2)],
-                                 [string substringWithRange:NSMakeRange(5, 2)]];
-        
-        unsigned red, green, blue;
-        NSScanner *scanner = [NSScanner scannerWithString:colorString];
-        if ([scanner scanHexInt:&red] && [scanner scanHexInt:&green] && [scanner scanHexInt:&blue]) {
-            color = [[UIColor alloc] initWithRed:(float)red / 0xff
-                                           green:(float)green / 0xff
-                                            blue:(float)blue / 0xff
-                                           alpha:alpha];
-        }
-    }
-    return color;
-}
 
 #pragma mark - UIAlertView
 
@@ -421,7 +385,7 @@
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Do you make a vow?", nil) message:message
                                                    delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Yes, I do", nil), nil];
 	[alert show];	
-	[alert release];
+	//[alert release];
 }
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

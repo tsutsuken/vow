@@ -15,12 +15,12 @@
 @synthesize timeIntervalArray;
 
 #pragma mark - Memory management
-
+/*
 - (void)dealloc
 {
     [super dealloc];
 }
-
+*/
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -41,8 +41,8 @@
 {
     [super viewDidLoad];
     self.title = NSLocalizedString(@"Settings", nil);
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                                                                            target:self action:@selector(closeSettingView:)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
+                                                                                            target:self action:@selector(closeSettingView:)];
     
     self.timeIntervalArray =[[NSArray alloc] initWithObjects:
                              NSLocalizedString(@"None",nil),
@@ -117,7 +117,7 @@
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReminderCellIdentifier];
         if (cell == nil) {		
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ReminderCellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ReminderCellIdentifier];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         cell.textLabel.text = NSLocalizedString(@"Reminder", nil);
@@ -132,7 +132,7 @@
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {		
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         if (indexPath.section == 1) {
@@ -202,7 +202,7 @@
 {
     CopyrightViewController *controller = [[CopyrightViewController alloc] initWithNibName:@"CopyrightViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
-    [controller release];
+    //[controller release];
     
 }
 
@@ -216,7 +216,7 @@
     controller.timeIntervalInt = [[defaults objectForKey:kTimeInterval] intValue];
     
     [self.navigationController pushViewController:controller animated:YES];
-    [controller release];
+    //[controller release];
     
 }
 - (void)reminderViewControllerDidFinish:(ReminderViewController *)controller
@@ -226,8 +226,9 @@
     [defaults synchronize];
     [self.tableView reloadData];
     
-    [appDelegate setReminder];
-    //[appDelegate resetAllReminders];
+    id apDelegate = [[UIApplication sharedApplication] delegate];
+    
+    [apDelegate setReminder];//Ken
     
 }
 
@@ -280,7 +281,7 @@
      */
 	
 	[self presentModalViewController:picker animated:YES];
-    [picker release];
+    //[picker release];Ken
 }
 
 

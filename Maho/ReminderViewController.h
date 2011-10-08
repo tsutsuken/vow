@@ -12,7 +12,7 @@
 
 @interface ReminderViewController : UITableViewController {
     
-    id <ReminderViewControllerDelegate> delegate;
+    //id <ReminderViewControllerDelegate> delegate;
     NSArray *timeIntervalArray;
     int timeIntervalInt;
     

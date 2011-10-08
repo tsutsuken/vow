@@ -27,7 +27,6 @@
 #define kSupportURLForEnglish @"http://www.facebook.com/pages/vow-To-Do-Today/212901032083791?sk=wall"
 #define kNotificationReloadSecondView @"ReloadSecondView"
 #define kTimeInterval @"TimeIntervalInt"
-#define appDelegate [[UIApplication sharedApplication] delegate]
 
 #define kAppURLForJapanese @"http://bit.ly/qj0x31"
 #define kAppURLForEnglish @"http://bit.ly/nZVwsr"

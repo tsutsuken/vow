@@ -7,21 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AdWhirlView.h"
-#import "AdWhirlDelegateProtocol.h"
 
 @class Promise,Action;
 
-@interface ActionsViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,AdWhirlDelegate>{
+@interface ActionsViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>{
     
-    IBOutlet UITableView *tableView;
+    IBOutlet UITableView *actionTableView;
     Promise *promise;
     Action *action;
     NSMutableArray *actionsArray;
     NSDateFormatter *dateFormatter;
     
 }
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) IBOutlet UITableView *actionTableView;
 @property (nonatomic, retain) Promise *promise;
 @property (nonatomic, retain) Action *action;
 @property (nonatomic, retain) NSMutableArray *actionsArray;
@@ -29,6 +27,5 @@
 
 - (void)setActionsArray;
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
-- (void)setAdWhirlView;
 
 @end

@@ -11,10 +11,6 @@
 
 @implementation CopyrightViewController
 
-- (void)dealloc
-{
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning
 {

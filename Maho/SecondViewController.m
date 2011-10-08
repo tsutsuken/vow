@@ -120,10 +120,12 @@
     
     NSArray *fetchedObjects = [aFetchedResultsController fetchedObjects];
     
+    /*Ken
     [aFetchedResultsController release];
     [fetchRequest release];
     [sortDescriptors release];
     [sortDescriptor release];
+     */
 
     for (int i = 0; i < [fetchedObjects count]; i++) {
         //格納する日付は、GMT:0をローカルでの時分なしに変換したもの
@@ -196,8 +198,7 @@
     
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tv dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-    
+    if (cell == nil) cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     Promise *aPromise = [dataDictionary objectForKey:[self.monthView dateSelected]];
     NSMutableArray *actionsArray = [[NSMutableArray alloc] initWithArray:[aPromise.actions allObjects]];
     Action *anAction = [actionsArray objectAtIndex:indexPath.row];
@@ -217,7 +218,6 @@
     ActionsViewController *controller = [[ActionsViewController alloc] initWithNibName:@"ActionsViewController" bundle:nil];
     controller.promise = [dataDictionary objectForKey:[self.monthView dateSelected]];
     [[self navigationController] pushViewController:controller animated:YES];
-    [controller release];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
