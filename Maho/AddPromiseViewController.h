@@ -28,12 +28,10 @@
 @property (nonatomic, assign) IBOutlet EditableTableViewCell *editableTableViewCell;
 
 - (void)addAction;
-- (void)judgePromise;
 - (void)finish:(id)sender;
 - (void)cancel:(id)sender;
 - (UIColor *)initWithHex:(NSString *)string alpha:(CGFloat)alpha;
 - (void)insertActionAnimated:(BOOL)animated;
-- (void)showWarningAlert;
 - (void)showConfirmAlert;
 
 @end

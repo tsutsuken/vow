@@ -23,15 +23,6 @@
 @synthesize actionsArray;
 @synthesize editableTableViewCell;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 #pragma mark - Memory management
 
 - (void)dealloc
@@ -407,16 +398,7 @@
 }
 
 #pragma mark - UIAlertView
-/*
-- (void)showWarningAlert
-{
-	// open an alert with just an OK button
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", nil) message:NSLocalizedString(@"Please add action", nil)
-                                                   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-	[alert show];	
-	[alert release];
-}
- */
+
 -(NSString *)messageForConfirmAlert
 {
     NSString *preMessage = NSLocalizedString(@"Do you make a vow to do", nil);

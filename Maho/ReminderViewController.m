@@ -35,17 +35,8 @@
     [super viewDidLoad];
     self.title = NSLocalizedString(@"Reminder", nil);
     
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(back)];
-	self.navigationItem.leftBarButtonItem = cancelButton;
-	[cancelButton release];
-    
 }
 
-- (void)back
-{
-    [self.delegate reminderViewControllerDidFinish:self];
-    [self.navigationController popViewControllerAnimated:YES];
-}
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -53,19 +44,11 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    [self.delegate reminderViewControllerDidFinish:self];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

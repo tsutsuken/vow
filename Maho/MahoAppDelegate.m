@@ -411,6 +411,7 @@
     
 }
 
+
 #pragma mark - Date Formatter
 
 - (NSDateFormatter *)dateFormatter {	
@@ -424,4 +425,18 @@
 	return dateFormatter;
 }
 
+#pragma mark - Language
+-(BOOL)isJapanese
+{
+    BOOL isJapanese;
+    NSUserDefaults *defs = [NSUserDefaults  standardUserDefaults];
+    NSArray *languages = [defs objectForKey:@"AppleLanguages"];
+    NSString *preferredLang = [languages objectAtIndex:0];
+    if ([preferredLang isEqualToString:@"ja"]) {
+        isJapanese = YES;
+    } else {
+        isJapanese = NO;
+    }
+    return isJapanese;
+}
 @end

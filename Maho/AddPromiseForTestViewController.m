@@ -348,13 +348,13 @@
     
     [actionsArray addObject:newAction];
     NSLog(@"Action count %d", [actionsArray count]);
-    
+    /*
     NSError *error = nil;
     if (![promise.managedObjectContext save:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         exit(-1);
     }
-	
+	*/
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[actionsArray count]-1 inSection:1];
     UITableViewRowAnimation animationStyle = UITableViewRowAnimationNone;
 	if (animated) {
@@ -368,22 +368,14 @@
 }
 
 #pragma mark - Editing text fields
-/*
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    
-	Action *editedAction = [actionsArray objectAtIndex:textField.tag];
-	editedAction.action = textField.text;
-	
-	return YES;
-}	
-*/
+
 - (void)textFieldDidChange:(UITextField *)textField {
     
 	Action *editedAction = [actionsArray objectAtIndex:textField.tag];
 	editedAction.action = textField.text;
     
     NSLog(@"textFieldから挿入されたアクション:%@ %s",editedAction.action ,__func__);
-
+    
 }
 
 

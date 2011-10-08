@@ -28,3 +28,10 @@
 #define kNotificationReloadSecondView @"ReloadSecondView"
 #define kTimeInterval @"TimeIntervalInt"
 #define appDelegate [[UIApplication sharedApplication] delegate]
+
+#define kAppURLForJapanese @"http://bit.ly/qj0x31"
+#define kAppURLForEnglish @"http://bit.ly/nZVwsr"
+
+#define kSiteIDForAdMaker @"1644"
+#define kZoneIDForAdMaker @"4158"
+#define kURLForAdMaker @"http://images.ad-maker.info/apps/fi3t9wof983z.html"

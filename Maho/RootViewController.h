@@ -7,15 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MahoAppDelegate.h"
 #import <CoreData/CoreData.h>
 #import "AddPromiseViewController.h"
 #import "AddPromiseForTestViewController.h"
 #import "AdWhirlView.h"
 #import "AdWhirlDelegateProtocol.h"
+#import "CheckBoxTableViewCell.h"
+#import <Twitter/Twitter.h>
+#import "AdMakerView.h"
 
 @class Promise,Action;
 
-@interface RootViewController : UIViewController <NSFetchedResultsControllerDelegate,AddPromiseViewControllerDelegate,SettingViewControllerDelegate,UIAlertViewDelegate,AddPromiseForTestViewControllerDelegate,AdWhirlDelegate,UITableViewDelegate, UITableViewDataSource> {
+@interface RootViewController : UIViewController <NSFetchedResultsControllerDelegate,AddPromiseViewControllerDelegate,SettingViewControllerDelegate,UIAlertViewDelegate,AddPromiseForTestViewControllerDelegate,AdWhirlDelegate,UITableViewDelegate, UITableViewDataSource,UIActionSheetDelegate> {
 
     NSManagedObjectContext *managedObjectContext;
     NSManagedObjectContext *addingManagedObjectContext;
@@ -25,6 +29,8 @@
     NSDateFormatter *dateFormatter;
     UIButton *footerButton;
     IBOutlet UITableView *tableView;
+    CheckBoxTableViewCell *checkBoxTableViewCell;
+    AdMakerView *AdMaker;
     
 }
 
@@ -36,6 +42,8 @@
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
 @property (nonatomic, retain) UIButton *footerButton;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, assign) IBOutlet CheckBoxTableViewCell *checkBoxTableViewCell;
+@property (nonatomic, retain) AdMakerView *AdMaker;
 
 - (BOOL)canTakeNewVow;
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -51,5 +59,9 @@
 - (void)showResultAlertWithMessage:(NSString *)message andTitle:(NSString *)title;
 - (void)showConfirmAlert;
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
+- (void)showTweetView;
+- (void)showActionSheetForOutPut;
+- (NSString *)messageForTwitter;
+- (NSString *)URLForApp;
 
 @end

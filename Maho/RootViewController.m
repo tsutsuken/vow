@@ -19,6 +19,98 @@
 @synthesize dateFormatter;
 @synthesize footerButton;
 @synthesize tableView;
+@synthesize checkBoxTableViewCell;
+@synthesize AdMaker;
+
+#pragma mark - Twitter
+
+- (void)showTweetView
+{
+    TWTweetComposeViewController *twitter = [[TWTweetComposeViewController alloc] init];
+    // MeetingSetupViewController.m: error: Semantic Issue: Use of undeclared identifier 'TWTweetComposeViewController'
+    
+    [twitter setInitialText:[self messageForTwitter]];
+    
+    [self presentViewController:twitter animated:YES completion:nil];
+    
+    
+    twitter.completionHandler = ^(TWTweetComposeViewControllerResult res) 
+    {
+        if(res == TWTweetComposeViewControllerResultDone){
+            
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Your Tweet was posted succesfully", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+            
+        }else if(res == TWTweetComposeViewControllerResultCancelled){
+            /*
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Twitter" message:@"Your Tweet was not posted" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+            */
+        }
+        
+        
+        [self dismissModalViewControllerAnimated:YES];   
+    };
+}
+
+- (NSString *)messageForTwitter
+{
+    NSString *messageForTwitter = NSLocalizedString(@"#ToDoToday", nil);
+    NSString *actionString = nil;
+    
+    for (int i = 0; i < [actionsArray count]; i++) {
+        if([[actionsArray objectAtIndex:i] valueForKey:@"action"]){
+            actionString = [@"\n◆" stringByAppendingString:[[actionsArray objectAtIndex:i] valueForKey:@"action"]];
+            NSLog(@"actionString:%@",actionString);
+            messageForTwitter = [messageForTwitter stringByAppendingString:actionString];
+            actionString = nil;
+        }
+        
+    }
+    NSString *footer = [@"\n " stringByAppendingString:[self URLForApp]];
+    messageForTwitter = [messageForTwitter stringByAppendingString:footer];
+
+    return messageForTwitter;
+}
+
+- (NSString *)URLForApp
+{
+    if ([appDelegate isJapanese]) {
+        return kAppURLForJapanese;
+    }
+    else{
+        return kAppURLForEnglish;
+    }
+}
+#pragma mark - UIActionSheetDelegate
+
+- (void)showActionSheetForOutPut
+{
+	// open a dialog with two custom buttons
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",nil) destructiveButtonTitle:nil
+                                                    otherButtonTitles:NSLocalizedString(@"Tweet",nil),
+                                                                      nil];
+	actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+	//actionSheet.destructiveButtonIndex = 1;	// make the second button red (destructive)
+	[actionSheet showInView:self.view.window]; // show from our table view (pops up in the middle of the table)
+	[actionSheet release];
+}
+
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	// the user clicked one of the OK/Cancel buttons
+	if (buttonIndex == 0)
+	{
+		NSLog(@"ok");
+        [self showTweetView];
+	}
+	else
+	{
+		NSLog(@"cancel");
+	}
+}
 
 #pragma mark - Memory management
 
@@ -38,6 +130,38 @@
 {
     [super viewDidUnload];
 }
+#pragma mark AdMaker
+- (void)setAdMaker
+{
+    AdMaker = [[AdMakerView alloc] init];
+    [AdMaker setAdMakerDelegate:self];
+    [AdMaker setFrame:CGRectMake(0, 0, 320, 50)]; //(0, 317, 320, 50)
+    [AdMaker start];
+    
+}
+
+-(UIViewController*)currentViewControllerForAdMakerView:(AdMakerView*)view 
+{
+    return self;
+}
+
+-(NSArray*)adKeyForAdMakerView:(AdMakerView*)view 
+{
+    return [NSArray arrayWithObjects:kURLForAdMaker,kSiteIDForAdMaker,kZoneIDForAdMaker,nil]; 
+}
+
+//広告の取得に成功
+- (void)didLoadAdMakerView:(AdMakerView*)view 
+{
+    [self.view addSubview:AdMaker.view];
+}
+
+//広告の取得に失敗
+- (void) didFailedLoadAdMakerView:(AdMakerView*)view 
+{
+    
+}
+
 
 #pragma mark AdWhirlDelegate methods
 - (void)setAdWhirlView
@@ -79,24 +203,22 @@
      self.navigationItem.leftBarButtonItem = settingButton;
     [settingButton release];
      
-    /*
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoLight];
-    [button addTarget:self action:@selector(showSettingView) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *infoItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.leftBarButtonItem = infoItem;
-    [infoItem release];
-     */
 
-    
+    UIBarButtonItem *tweetButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheetForOutPut)];
+    self.navigationItem.rightBarButtonItem = tweetButton;
+    [tweetButton release];
+
+    /*
     UIBarButtonItem *testButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Test",nil) style:UIBarButtonItemStylePlain target:self action:@selector(showAddPromiseForTestView)];
     self.navigationItem.rightBarButtonItem = testButton;
     [testButton release];
-     
+     */
 
     [self setPromise];
     [self setActionsArray];
     [self setFooterButton];
-    [self setAdWhirlView];
+    //[self setAdWhirlView];
+    [self setAdMaker];
     
     NSLog(@"state is %@ in %s",promise.state, __func__);
     
@@ -107,6 +229,7 @@
     [super viewWillAppear:animated];
      NSLog(@"canTakeNewVow %d",[self canTakeNewVow]);
     footerButton.enabled = [self canTakeNewVow];
+    [AdMaker viewWillAppear];//広告のviewを表示します。
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -117,6 +240,8 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
+    [AdMaker viewWillDisappear];//広告のviewが非表示になったことを伝えます。
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -132,7 +257,7 @@
     self.tableView.tableFooterView = nil;
     
     self.footerButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    self.footerButton.frame = CGRectMake(0, 30, 280, 44);
+    self.footerButton.frame = CGRectMake(20, 0, 280, 44);
     self.footerButton.backgroundColor = [UIColor clearColor];
     
     //ボタン有効時
@@ -150,7 +275,8 @@
     
     [footerButton addTarget:self action:@selector(pushFooterButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, 280, 100)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 70)];
+    //footerView.backgroundColor = [UIColor blueColor];
     [footerView addSubview:footerButton];
     
     self.tableView.tableFooterView = footerView; 
@@ -225,6 +351,8 @@
     if (promise) {
         if ([promise.state isEqualToString:kPromiseStateDoing]) {
             
+            NSLog(@"Setting ActionsArray");
+            
             NSManagedObjectContext *context = self.managedObjectContext;
             
             NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -278,6 +406,37 @@
     return [actionsArray count];
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *checkBoxCellIdentifier = @"CheckBoxCellIdentifier";
+    
+    /*
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:checkBoxleCellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:checkBoxleCellIdentifier] autorelease];
+    }
+    */
+    CheckBoxTableViewCell *cell = (CheckBoxTableViewCell *)[tableView dequeueReusableCellWithIdentifier:checkBoxCellIdentifier];
+    
+    if (cell == nil) {		
+        [[NSBundle mainBundle] loadNibNamed:@"CheckBoxTableViewCell" owner:self options:nil];
+        cell = checkBoxTableViewCell;
+        cell.label.text = NSLocalizedString(@"Ken", nil);
+        self.checkBoxTableViewCell = nil;
+    }
+    
+    Action *anAction = [self.actionsArray objectAtIndex:indexPath.row];
+    cell.label.text = [[anAction valueForKey:@"action"] description];
+    if ([anAction.done boolValue] == YES) {
+        [cell.checkBox setSelected:YES];
+    }
+    else {
+        [cell.checkBox setSelected:NO];
+    }
+    return cell;
+}
+
+/*
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -292,7 +451,7 @@
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
-
+*/
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     //actionが0の時にやると落ちる
@@ -319,14 +478,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Action *selectedAction = [actionsArray objectAtIndex:indexPath.row];
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    CheckBoxTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     if ([selectedAction.done boolValue] == YES) {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        //cell.accessoryType = UITableViewCellAccessoryNone;
+        [cell.checkBox setSelected:NO];
         selectedAction.done = [NSNumber numberWithBool:NO];
     }
     else {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        //cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [cell.checkBox setSelected:YES];
         selectedAction.done = [NSNumber numberWithBool:YES];
     }
     
@@ -429,7 +590,7 @@
 	
 	[addingManagedObjectContext setPersistentStoreCoordinator:[self.managedObjectContext persistentStoreCoordinator]];
     
-    controller.promise = (Promise *)[NSEntityDescription insertNewObjectForEntityForName:@"Promise" inManagedObjectContext:addingContext];
+    controller.promise = (Promise *)[NSEntityDescription insertNewObjectForEntityForName:@"Promise" inManagedObjectContext:self.addingManagedObjectContext];//addingContextだった
     
     //時分を含まないGMT0の日付をセット
     NSString *nowDateString = [self.dateFormatter stringFromDate:[NSDate date]];
@@ -457,13 +618,6 @@
 			exit(-1);  // Fail
 		}
 		[dnc removeObserver:self name:NSManagedObjectContextDidSaveNotification object:addingManagedObjectContext];
-    
-        [self setPromise];
-        [self setActionsArray];
-        [self.tableView reloadData];
-        [self setFooterButton];
-        [self showBeginningAlert];
-        [appDelegate setReminder];
         
 	}
 	self.addingManagedObjectContext = nil;
@@ -478,6 +632,15 @@
 	
 	// Merging changes causes the fetched results controller to update its results
 	[self.managedObjectContext mergeChangesFromContextDidSaveNotification:saveNotification];	
+    
+    [self setPromise];
+    [self setActionsArray];
+    [self.tableView reloadData];
+    [self setFooterButton];
+    [self showBeginningAlert];
+    [appDelegate setReminder];
+    
+    NSLog(@"ManagedObject Saved");
 }
 /*
  

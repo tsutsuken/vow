@@ -30,12 +30,13 @@
 
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
 
--(void)setReminder;
--(void)resetAllReminders;
+- (void)setReminder;
+- (void)resetAllReminders;
 - (int)countOfReminder;
 - (NSString *)messageForReminderWith:(Promise *)promise;
 - (Promise *)promiseForReminder;
 - (NSMutableArray *)setActionsArrayWith:(Promise *)promise;
 - (NSDateFormatter *)dateFormatter;
+-(BOOL)isJapanese;
 
 @end
