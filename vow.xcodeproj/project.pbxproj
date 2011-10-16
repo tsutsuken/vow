@@ -39,7 +39,6 @@
 		1F8279501438C21D00C3B85C /* CheckBoxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F82794E1438C21D00C3B85C /* CheckBoxTableViewCell.xib */; };
 		1F829ACD138E52F60018B8BE /* ActionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F829ACB138E52F60018B8BE /* ActionsViewController.m */; };
 		1F829ACE138E52F60018B8BE /* ActionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F829ACC138E52F60018B8BE /* ActionsViewController.xib */; };
-		1F8A3144143B6BE600C16B18 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8A3143143B6BE600C16B18 /* Twitter.framework */; };
 		1F8CBA0D13928F810045068C /* ReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CBA0B13928F810045068C /* ReminderViewController.m */; };
 		1F8CBA0E13928F810045068C /* ReminderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8CBA0C13928F810045068C /* ReminderViewController.xib */; };
 		1F907059143B4F7000CC247B /* libAdMaker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F907058143B4F7000CC247B /* libAdMaker.a */; };
@@ -208,7 +207,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F8A3144143B6BE600C16B18 /* Twitter.framework in Frameworks */,
 				1F3FF6E914397EF200711A9F /* libTapkuLibrary.a in Frameworks */,
 				1FE5A862139B513200A1D481 /* OpenAL.framework in Frameworks */,
 				1FC5BA52138DED3400F5444F /* MediaPlayer.framework in Frameworks */,
@@ -760,7 +758,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = Library/TapKuLibrary/src;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -784,7 +782,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = Library/TapKuLibrary/src;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -908,7 +906,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = Library/TapKuLibrary/src;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",

@@ -12,7 +12,6 @@
 #import "AddPromiseViewController.h"
 #import "AddPromiseForTestViewController.h"
 #import "CheckBoxTableViewCell.h"
-#import <Twitter/Twitter.h>
 #import "AdMakerView.h"
 
 @class Promise,Action;
@@ -57,9 +56,5 @@
 - (void)showResultAlertWithMessage:(NSString *)message andTitle:(NSString *)title;
 - (void)showConfirmAlert;
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
-- (void)showTweetView;
-- (void)showActionSheetForOutPut;
-- (NSString *)messageForTwitter;
-- (NSString *)URLForApp;
 
 @end

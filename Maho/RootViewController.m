@@ -22,93 +22,6 @@
 @synthesize checkBoxTableViewCell;
 @synthesize AdMaker;
 
-#pragma mark - Twitter
-
-- (void)showTweetView
-{
-    TWTweetComposeViewController *twitter = [[TWTweetComposeViewController alloc] init];
-    // MeetingSetupViewController.m: error: Semantic Issue: Use of undeclared identifier 'TWTweetComposeViewController'
-    
-    [twitter setInitialText:[self messageForTwitter]];
-    
-    [self presentViewController:twitter animated:YES completion:nil];
-    
-    
-    twitter.completionHandler = ^(TWTweetComposeViewControllerResult res) 
-    {
-        if(res == TWTweetComposeViewControllerResultDone){
-            
-            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Your Tweet was posted succesfully", nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertView show];
-            
-        }else if(res == TWTweetComposeViewControllerResultCancelled){
-
-        }
-        
-        
-        [self dismissModalViewControllerAnimated:YES];   
-    };
-}
-
-- (NSString *)messageForTwitter
-{
-    NSString *messageForTwitter = NSLocalizedString(@"#ToDoToday", nil);
-    NSString *actionString = nil;
-    
-    for (int i = 0; i < [actionsArray count]; i++) {
-        if([[actionsArray objectAtIndex:i] valueForKey:@"action"]){
-            actionString = [@"\n◆" stringByAppendingString:[[actionsArray objectAtIndex:i] valueForKey:@"action"]];
-            NSLog(@"actionString:%@",actionString);
-            messageForTwitter = [messageForTwitter stringByAppendingString:actionString];
-            actionString = nil;
-        }
-        
-    }
-    NSString *footer = [@"\n " stringByAppendingString:[self URLForApp]];
-    messageForTwitter = [messageForTwitter stringByAppendingString:footer];
-
-    return messageForTwitter;
-}
-
-- (NSString *)URLForApp
-{
-    id appDelegate = [[UIApplication sharedApplication] delegate];
-    if ([appDelegate isJapanese]) {
-        return kAppURLForJapanese;
-    }
-    else{
-        return kAppURLForEnglish;
-    }
-}
-#pragma mark - UIActionSheetDelegate
-
-- (void)showActionSheetForOutPut
-{
-	// open a dialog with two custom buttons
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                             delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",nil) destructiveButtonTitle:nil
-                                                    otherButtonTitles:NSLocalizedString(@"Tweet",nil),
-                                                                      nil];
-	actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-	//actionSheet.destructiveButtonIndex = 1;	// make the second button red (destructive)
-	[actionSheet showInView:self.view.window]; // show from our table view (pops up in the middle of the table)
-
-}
-
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	// the user clicked one of the OK/Cancel buttons
-	if (buttonIndex == 0)
-	{
-		NSLog(@"ok");
-        [self showTweetView];
-	}
-	else
-	{
-		NSLog(@"cancel");
-	}
-}
 
 #pragma mark - Memory management
 
@@ -167,11 +80,6 @@
     
     UIBarButtonItem *settingButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Settings",nil) style:UIBarButtonItemStylePlain target:self action:@selector(showSettingView)];
      self.navigationItem.leftBarButtonItem = settingButton;
-     
-    /*
-    UIBarButtonItem *tweetButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheetForOutPut)];
-    self.navigationItem.rightBarButtonItem = tweetButton;
-     */
     
     /*
     UIBarButtonItem *testButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Test",nil) style:UIBarButtonItemStylePlain target:self action:@selector(showAddPromiseForTestView)];
