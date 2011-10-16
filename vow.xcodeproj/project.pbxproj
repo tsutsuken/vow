@@ -806,7 +806,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Maho/vow-Prefix.pch";
 				INFOPLIST_FILE = "Maho/vow-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../../../../Library/Developer/Xcode/DerivedData/vow-gyjaqjvximcwwqcteeuxeavsivdx/Build/Products/Release-iphoneos\"",
 					"$(inherited)",
@@ -831,7 +831,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Maho/vow-Prefix.pch";
 				INFOPLIST_FILE = "Maho/vow-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../../../../Library/Developer/Xcode/DerivedData/vow-gyjaqjvximcwwqcteeuxeavsivdx/Build/Products/Release-iphoneos\"",
 					"$(inherited)",
@@ -929,7 +929,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Maho/vow-Prefix.pch";
 				INFOPLIST_FILE = "Maho/vow-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../../../../Library/Developer/Xcode/DerivedData/vow-gyjaqjvximcwwqcteeuxeavsivdx/Build/Products/Release-iphoneos\"",
 					"$(inherited)",

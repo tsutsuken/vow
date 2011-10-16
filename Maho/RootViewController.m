@@ -42,10 +42,7 @@
             [alertView show];
             
         }else if(res == TWTweetComposeViewControllerResultCancelled){
-            /*
-            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Twitter" message:@"Your Tweet was not posted" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertView show];
-            */
+
         }
         
         
@@ -114,13 +111,7 @@
 }
 
 #pragma mark - Memory management
-/*
-- (void)dealloc
-{
-    [__managedObjectContext release];
-    [super dealloc];
-}
-*/
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -136,7 +127,7 @@
 {
     AdMaker = [[AdMakerView alloc] init];
     [AdMaker setAdMakerDelegate:self];
-    [AdMaker setFrame:CGRectMake(0, 0, 320, 50)]; //(0, 317, 320, 50)
+    [AdMaker setFrame:CGRectMake(0, 317, 320, 50)]; //(0, 317, 320, 50)
     [AdMaker start];
     
 }
@@ -176,23 +167,20 @@
     
     UIBarButtonItem *settingButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Settings",nil) style:UIBarButtonItemStylePlain target:self action:@selector(showSettingView)];
      self.navigationItem.leftBarButtonItem = settingButton;
-    //[settingButton release];
      
-
+    /*
     UIBarButtonItem *tweetButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionSheetForOutPut)];
     self.navigationItem.rightBarButtonItem = tweetButton;
-    //[tweetButton release];
-
+     */
+    
     /*
     UIBarButtonItem *testButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Test",nil) style:UIBarButtonItemStylePlain target:self action:@selector(showAddPromiseForTestView)];
     self.navigationItem.rightBarButtonItem = testButton;
-    [testButton release];
      */
 
     [self setPromise];
     [self setActionsArray];
     [self setFooterButton];
-    //[self setAdWhirlView];
     [self setAdMaker];
     
     NSLog(@"state is %@ in %s",promise.state, __func__);
@@ -308,12 +296,7 @@
     if (![[aFetchedResultsController fetchedObjects] count] == 0) {
         self.promise = [[aFetchedResultsController fetchedObjects] objectAtIndex:0];
     }
-    /*
-    [aFetchedResultsController release];
-    [fetchRequest release];
-    [sortDescriptors release];
-    [sortDescriptor release];
-    */
+
     NSLog(@"state is %@ in %s",promise.state, __func__);
     
 }
@@ -354,14 +337,6 @@
             NSMutableArray *mutableArray = [fetchedObjects mutableCopy];
             self.actionsArray = mutableArray;
             
-            /*
-            [mutableArray release];
-            //[fetchedObjects release];//サンプルではリリースしない
-            [fetchRequest release];
-            [sortDescriptor release];
-            [sortDescriptors release];
-             */
-            
         }
     }
     
@@ -387,12 +362,6 @@
 {
     static NSString *checkBoxCellIdentifier = @"CheckBoxCellIdentifier";
     
-    /*
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:checkBoxleCellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:checkBoxleCellIdentifier] autorelease];
-    }
-    */
     CheckBoxTableViewCell *cell = (CheckBoxTableViewCell *)[tableView dequeueReusableCellWithIdentifier:checkBoxCellIdentifier];
     
     if (cell == nil) {		
@@ -413,22 +382,6 @@
     return cell;
 }
 
-/*
-// Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-
-    // Configure the cell.
-    [self configureCell:cell atIndexPath:indexPath];
-    return cell;
-}
-*/
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     //actionが0の時にやると落ちる
@@ -716,7 +669,6 @@
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Have a nice day!", nil) message:nil
                                                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 	[alert show];	
-	//[alert release];
 }
 
 - (void)showResultAlertWithMessage:(NSString *)message andTitle:(NSString *)title
@@ -724,14 +676,12 @@
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message
                                                    delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
 	[alert show];	
-	//[alert release];
 }
 - (void)showConfirmAlert
 {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Are you sure?", nil) message:nil
                                                    delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"YES", nil), nil];
 	[alert show];	
-	//[alert release];
 }
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

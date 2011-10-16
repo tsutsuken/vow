@@ -76,18 +76,7 @@
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
 }
-/*Ken
-- (void)dealloc
-{
-    [_window release];
-    [__managedObjectContext release];
-    [__managedObjectModel release];
-    [__persistentStoreCoordinator release];
-    [_navigationControllerForRootView release];
-    [_navigationControllerForSecondView release];
-    [super dealloc];
-}
-*/
+
 - (void)awakeFromNib
 {
     RootViewController *rootViewController = (RootViewController *)[self.navigationControllerForRootView topViewController];

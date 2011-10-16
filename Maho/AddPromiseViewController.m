@@ -247,12 +247,14 @@
 		[actionsArray removeObject:deletingAction];
 		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
 		
-		// Save the change.
+        //ここが原因のはず
+		/*
 		NSError *error = nil;
 		if (![context save:&error]) {
 			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 			exit(-1);
-		}	
+		}
+         */
         if ([actionsArray count] == 0) {
             self.navigationItem.rightBarButtonItem.enabled = NO;
         }
