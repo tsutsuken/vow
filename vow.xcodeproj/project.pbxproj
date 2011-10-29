@@ -55,7 +55,6 @@
 		1FB281EB1356EEB2003B2E2A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FB281E91356EEB2003B2E2A /* InfoPlist.strings */; };
 		1FB281EE1356EEB2003B2E2A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB281ED1356EEB2003B2E2A /* main.m */; };
 		1FB281F11356EEB2003B2E2A /* MahoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB281F01356EEB2003B2E2A /* MahoAppDelegate.m */; };
-		1FB281F41356EEB2003B2E2A /* Maho.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1FB281F21356EEB2003B2E2A /* Maho.xcdatamodeld */; };
 		1FB281F71356EEB2003B2E2A /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FB281F51356EEB2003B2E2A /* MainWindow.xib */; };
 		1FB282041356EEB2003B2E2A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB281DE1356EEB2003B2E2A /* UIKit.framework */; };
 		1FB282051356EEB2003B2E2A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB281E01356EEB2003B2E2A /* Foundation.framework */; };
@@ -73,6 +72,8 @@
 		1FC571531438B0DE004F0F27 /* AddPromiseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC571511438B0D9004F0F27 /* AddPromiseViewController.xib */; };
 		1FC5BA50138DE7F800F5444F /* jtUniversalLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FC5BA4F138DE7F800F5444F /* jtUniversalLib.a */; };
 		1FC5BA52138DED3400F5444F /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FC5BA51138DED3400F5444F /* MediaPlayer.framework */; };
+		1FCB89C814523FCA003ECFA2 /* Maho.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1FCB89C514523FCA003ECFA2 /* Maho.xcdatamodeld */; };
+		1FCB89CA1452408A003ECFA2 /* Model.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 1FCB89C91452408A003ECFA2 /* Model.xcmappingmodel */; };
 		1FD88B0313752E2A008BFB41 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD88B0113752542008BFB41 /* Icon@2x.png */; };
 		1FE5A862139B513200A1D481 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE5A861139B513200A1D481 /* OpenAL.framework */; };
 /* End PBXBuildFile section */
@@ -174,7 +175,6 @@
 		1FB281ED1356EEB2003B2E2A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1FB281EF1356EEB2003B2E2A /* MahoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MahoAppDelegate.h; sourceTree = "<group>"; };
 		1FB281F01356EEB2003B2E2A /* MahoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MahoAppDelegate.m; sourceTree = "<group>"; };
-		1FB281F31356EEB2003B2E2A /* Maho.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Maho.xcdatamodel; sourceTree = "<group>"; };
 		1FB281F61356EEB2003B2E2A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		1FB282031356EEB2003B2E2A /* vowTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vowTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FB2820C1356EEB2003B2E2A /* vowTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "vowTests-Info.plist"; sourceTree = "<group>"; };
@@ -198,6 +198,9 @@
 		1FC571511438B0D9004F0F27 /* AddPromiseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPromiseViewController.xib; sourceTree = "<group>"; };
 		1FC5BA4F138DE7F800F5444F /* jtUniversalLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = jtUniversalLib.a; sourceTree = "<group>"; };
 		1FC5BA51138DED3400F5444F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		1FCB89C614523FCA003ECFA2 /* Maho 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Maho 2.xcdatamodel"; sourceTree = "<group>"; };
+		1FCB89C714523FCA003ECFA2 /* Maho.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Maho.xcdatamodel; sourceTree = "<group>"; };
+		1FCB89C91452408A003ECFA2 /* Model.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model.xcmappingmodel; sourceTree = "<group>"; };
 		1FD88B0113752542008BFB41 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		1FE5A861139B513200A1D481 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -247,11 +250,12 @@
 		1F04B1321357209200741C40 /* DB */ = {
 			isa = PBXGroup;
 			children = (
-				1FB281F21356EEB2003B2E2A /* Maho.xcdatamodeld */,
+				1FCB89C514523FCA003ECFA2 /* Maho.xcdatamodeld */,
 				1F993E6913581626009FBF69 /* Promise.h */,
 				1F993E6A13581626009FBF69 /* Promise.m */,
 				1FBD0C0A13932B9500A5F183 /* Action.h */,
 				1F91D6BF1362C66E001C7E96 /* Action.m */,
+				1FCB89C91452408A003ECFA2 /* Model.xcmappingmodel */,
 			);
 			name = DB;
 			sourceTree = "<group>";
@@ -657,7 +661,6 @@
 			files = (
 				1FB281EE1356EEB2003B2E2A /* main.m in Sources */,
 				1FB281F11356EEB2003B2E2A /* MahoAppDelegate.m in Sources */,
-				1FB281F41356EEB2003B2E2A /* Maho.xcdatamodeld in Sources */,
 				1FB282211356EF2F003B2E2A /* SecondViewController.m in Sources */,
 				1F9FE6321399D77100837013 /* SettingViewController.m in Sources */,
 				1F04B147135750BC00741C40 /* AddPromiseViewController.m in Sources */,
@@ -671,6 +674,8 @@
 				1F7F4DB213923ACC00D2ED6F /* CopyrightViewController.m in Sources */,
 				1F8CBA0D13928F810045068C /* ReminderViewController.m in Sources */,
 				1F82794F1438C21D00C3B85C /* CheckBoxTableViewCell.m in Sources */,
+				1FCB89C814523FCA003ECFA2 /* Maho.xcdatamodeld in Sources */,
+				1FCB89CA1452408A003ECFA2 /* Model.xcmappingmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1002,12 +1007,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		1FB281F21356EEB2003B2E2A /* Maho.xcdatamodeld */ = {
+		1FCB89C514523FCA003ECFA2 /* Maho.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				1FB281F31356EEB2003B2E2A /* Maho.xcdatamodel */,
+				1FCB89C614523FCA003ECFA2 /* Maho 2.xcdatamodel */,
+				1FCB89C714523FCA003ECFA2 /* Maho.xcdatamodel */,
 			);
-			currentVersion = 1FB281F31356EEB2003B2E2A /* Maho.xcdatamodel */;
+			currentVersion = 1FCB89C614523FCA003ECFA2 /* Maho 2.xcdatamodel */;
 			path = Maho.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
